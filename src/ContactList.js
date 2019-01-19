@@ -70,17 +70,19 @@ class ContactList extends Component {
 //   resultData = data;
 //   console.log(data);
 // })
-const list= this.state.arr.map(item=><li key={item.id}>{item.name}</li>);
+const list = this.state.arr.map((item,i)=>
+
+    <li key={item.id}><h1>Name:{item.name}</h1> <h2>User Name: {item.username}</h2></li>
+ 
+);
 
     return (
       <div>
       <input type = 'text' onChange = {this.onInputChange}></input>
     <Contact firstName = {this.state.name} lastName='mcdaniel' phoneNumber = '585-721-3824' />
-        <ul>
-          
+          <ul>
            {list}
-          
-        </ul>
+           </ul>
     </div> 
     )
   }
