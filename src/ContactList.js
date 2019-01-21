@@ -40,14 +40,16 @@ class ContactList extends Component {
         test1:'',
         test2:''
       },
+      ctcList:[],
       arr: []
     }
   }
+//this one works for name 
+  // onInputChange = (event)=>{
+  //   this.setState({name:event.target.value});
+  //   console.log(event.target.value);
+  // }
 
-  onInputChange = (event)=>{
-    this.setState({name:event.target.value});
-    console.log(event.target.value);
-  }
   async componentDidMount() {
     try{
       const result = await fetch('https://jsonplaceholder.typicode.com/users')
@@ -59,13 +61,49 @@ class ContactList extends Component {
     }
   }
  
-  submitData = (event)=>{
-    event.preventDefault()
-    this.setState({newCtc:{test1:this.state.test1}})
-    // this.setState({newCtc:{test2:this.state.test2}})
-    console.log(this.state.newCtc)
+  // submitData = (event)=>{
+  //   event.preventDefault()
+  //   this.setState({newCtc:{test1:this.state.test1}})
+  //   // this.setState({newCtc:{test2:this.state.test2}})
+  //   console.log(this.state.newCtc)
+  // }
+  onChangeInput = (e)=>{
+    const target = e.target;
+    const name = target.name;
+    const value = target.value;
+    console.log(value)
+    this.setState({
+      [name]: value
+    });
   }
 
+  //work on this 
+  newSubmit = (e) =>{
+    e.preventDefault();
+    // const test1Submit = this.state.test1;
+    // this.setState({newCtc:{test1:test1Submit}});
+    this.setState(Object.assign(this.state.newCtc,{test1:this.state.test1, test2:this.state.test2}));
+    
+    console.log(this.state.newCtc)
+    this.addContact();
+    console.log(this.state.ctcList);
+
+    this.clearInput();
+    console.log(this.state.newCtc);
+    // const targetValue = e.target.elements.name;
+    // this.setState({e.target.element.name:targetValue)}
+    // console.log(targetValue)
+    }
+    addContact = ()=>{
+      const newItem = this.state.newCtc;
+      this.setState({ ctcList:[ ...this.state.ctcList, newItem] });
+    };
+    
+    clearInput = ()=>{
+      this.setState({test1:'',test2:''});
+      this.setState(Object.assign(this.state.newCtc,{test1:'', test2:''}));
+    };
+   
   render() {
 
 // async function getData(){
@@ -94,24 +132,18 @@ class ContactList extends Component {
     return (
       <div>
       <Contact firstName = {this.state.name} lastName='mcdaniel' phoneNumber = '585-721-3824' />
-      <input type = 'text' onChange = {this.onInputChange}></input>
+      <input type = 'text' name = 'name' onChange = {this.onChangeInput}></input>
 
       <TestData data={this.state.arr} />  
 
 
-      <form onSubmit = {this.submitData}>
+      <form onSubmit = {this.newSubmit}>
 
-      <input type='text' onChange = {(event)=>{
-        this.setState({test1:event.target.value});
-        console.log(this.state.test1)
-        }
-      }
+      <input type='text' name={'test1'} value={this.state.test1} onChange = {this.onChangeInput}
+      
         />
-      <input type='text' onChange = {(event)=>{
-        this.setState({test2:event.target.value});
-        console.log(this.state.test2)
-        }
-      }
+      <input type='text' name={'test2'} value={this.state.test2}  onChange = {this.onChangeInput}
+      
         />
       <button type='submit'> submit </button>
       </form>
