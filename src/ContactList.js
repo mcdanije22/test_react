@@ -85,6 +85,7 @@ class ContactList extends Component {
     this.setState(Object.assign(this.state.newCtc,{test1:this.state.test1, test2:this.state.test2}));
     
     console.log(this.state.newCtc)
+
     this.addContact();
     console.log(this.state.ctcList);
 
@@ -94,11 +95,16 @@ class ContactList extends Component {
     // this.setState({e.target.element.name:targetValue)}
     // console.log(targetValue)
     }
+    
+
     addContact = ()=>{
       const newItem = this.state.newCtc;
       this.setState({ ctcList:[ ...this.state.ctcList, newItem] });
+
     };
     
+
+
     clearInput = ()=>{
       this.setState({test1:'',test2:''});
       this.setState(Object.assign(this.state.newCtc,{test1:'', test2:''}));
