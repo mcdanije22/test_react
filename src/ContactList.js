@@ -108,6 +108,9 @@ class ContactList extends Component {
 
 
     addContact = ()=>{
+      if (this.state.test1  === '' || this.state.test2 === ''){
+        alert('Please enter all fields');
+      } else{
       let newCtcList = [...this.state.ctcList];
       newCtcList.push({...this.state.newCtc});
       
@@ -118,7 +121,7 @@ class ContactList extends Component {
     
 
     });
-
+  }
   };
   
     

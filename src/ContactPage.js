@@ -10,8 +10,7 @@ const ContactPage = ({contacts}) =>{
 
                 {
                     contacts.map((ctc,i)=>{
-                       return <li> <CtcCard  card = {ctc}/> </li>
-                       {/* return <li key= {i}> <h1>{ctc.test1}</h1> <h2>{ctc.test2}</h2></li> */}
+                       return <li key={i}> <CtcCard  card = {ctc}/> </li>
                     })
                 }
 
