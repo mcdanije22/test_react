@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Contact from './Contact';
 import TestData from './TestData';
-
+import ContactPage from './ContactPage';
 
 // class ContactList extends Component {
 //     render() {
@@ -36,10 +36,7 @@ class ContactList extends Component {
       name: '',
       test1:'',
       test2:'',
-      newCtc:{
-        test1:'',
-        test2:''
-      },
+      newCtc:{},
       ctcList:[],
       arr: []
     }
@@ -82,12 +79,17 @@ class ContactList extends Component {
     e.preventDefault();
     // const test1Submit = this.state.test1;
     // this.setState({newCtc:{test1:test1Submit}});
+
+
     this.setState(Object.assign(this.state.newCtc,{test1:this.state.test1, test2:this.state.test2}));
-    
+  
+
+
     console.log(this.state.newCtc)
 
     this.addContact();
-    console.log(this.state.ctcList);
+
+
 
     this.clearInput();
     console.log(this.state.newCtc);
@@ -96,14 +98,30 @@ class ContactList extends Component {
     // console.log(targetValue)
     }
     
-
-    addContact = ()=>{
-      const newItem = this.state.newCtc;
-      this.setState({ ctcList:[ ...this.state.ctcList, newItem] });
-
-    };
+ 
+    // addContact = ()=>{
+    //   this.setState({ ctcList:[ ...this.state.ctcList, this.state.newCtc] });
+    //   console.log(this.state.ctcList);
+    // };
     
 
+
+
+    addContact = ()=>{
+      let newCtcList = [...this.state.ctcList];
+      newCtcList.push({...this.state.newCtc});
+      
+
+    this.setState({ ctcList: newCtcList }, ()=>{
+      console.log(this.state.ctcList);
+      this.clearInput();
+    
+
+    });
+
+  };
+  
+    
 
     clearInput = ()=>{
       this.setState({test1:'',test2:''});
@@ -153,6 +171,8 @@ class ContactList extends Component {
         />
       <button type='submit'> submit </button>
       </form>
+
+      <ContactPage contacts = {this.state.ctcList} />
 
     </div> 
     )
