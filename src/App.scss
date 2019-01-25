@@ -1,10 +1,33 @@
 $mainColor: red;
 
-.card {
+$deskstop:760px;
+
+@mixin desktop{
+    @media (min-width: #{$deskstop}){
+        @content;
+    }
+}
+
+.cardList {
+    list-style-type: none;
     color:$mainColor;
-    font-size: 2rem;
+    font-size: 1.5rem;
+    height: 10rem;
+    width: 15rem;
+    background-color:gray;
+    text-align: center;
+
+    @include desktop {
+        background-color:blue;
+        font-size:2rem;
+        width: 20rem;
+        -webkit-clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+        clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+
+    }
     h2{
         color:black;
+        font-size: 1rem;
     }
 }
 

@@ -161,7 +161,6 @@ class ContactList extends Component {
       <Contact firstName = {this.state.name} lastName='mcdaniel' phoneNumber = '585-721-3824' />
       <input type = 'text' name = 'name' onChange = {this.onChangeInput}></input>
 
-      <TestData data={this.state.arr} />  
 
 
       <form onSubmit = {this.newSubmit}>
@@ -176,6 +175,8 @@ class ContactList extends Component {
       </form>
 
       <ContactPage contacts = {this.state.ctcList} />
+      <TestData data={this.state.arr} />  
+
 
     </div> 
     )
