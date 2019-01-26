@@ -65,13 +65,15 @@ class ContactList extends Component {
   //   console.log(this.state.newCtc)
   // }
   onChangeInput = (e)=>{
-    const target = e.target;
-    const name = target.name;
-    const value = target.value;
-    console.log(value)
-    this.setState({
-      [name]: value
-    });
+    // const target = e.target;
+    // const name = target.name;
+    // const value = target.value;
+    // console.log(value)
+    // this.setState({
+    //   [name]: value
+    // });
+    this.setState({[e.target.name]:e.target.value});
+    console.log(e.target.value);
   }
 
   //work on this 
