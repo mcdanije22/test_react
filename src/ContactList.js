@@ -90,6 +90,7 @@ class ContactList extends Component {
     console.log(this.state.newCtc)
 
     this.addContact();
+    this.localTest();
 
 
 
@@ -115,23 +116,43 @@ class ContactList extends Component {
       } else{
       let newCtcList = [...this.state.ctcList];
       newCtcList.push({...this.state.newCtc});
-      
+
 
     this.setState({ ctcList: newCtcList }, ()=>{
       console.log(this.state.ctcList);
-      this.clearInput();
-    
+      
+      
+      // this.clearInput();
+
+
+
 
     });
   }
   };
   
-    
+        //   const currentCtc = this.state.ctcList;
+        // console.log(oldStorage);
+        // const storageList = currentCtc.push(oldStorage);
+        // localStorage.setItem('contact' , JSON.stringify(storageList));
 
     clearInput = ()=>{
       this.setState({test1:'',test2:''});
       this.setState(Object.assign(this.state.newCtc,{test1:'', test2:''}));
     };
+
+    localTest = () => {
+      if(localStorage.getItem('contact') == null){
+        localStorage.setItem('contact', JSON.stringify([...this.state.ctcList]));
+      }else{
+        const oldStorage = JSON.parse(localStorage.getItem('contact'));
+        console.log('old' , oldStorage);
+        console.log('new', this.state.newCtc)
+        localStorage.setItem('contact', JSON.stringify([...oldStorage,this.state.newCtc ]));
+
+        // localStorage.setItem('contact', JSON.stringify([...this.state.ctcList ]));
+      }
+    }
    
   render() {
 
