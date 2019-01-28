@@ -90,11 +90,10 @@ class ContactList extends Component {
     console.log(this.state.newCtc)
 
     this.addContact();
-    this.localTest();
 
 
 
-    this.clearInput();
+    // this.clearInput();
     console.log(this.state.newCtc);
     // const targetValue = e.target.elements.name;
     // this.setState({e.target.element.name:targetValue)}
@@ -121,8 +120,8 @@ class ContactList extends Component {
     this.setState({ ctcList: newCtcList }, ()=>{
       console.log(this.state.ctcList);
       
-      
-      // this.clearInput();
+          this.localTest();
+
 
 
 
@@ -144,11 +143,13 @@ class ContactList extends Component {
     localTest = () => {
       if(localStorage.getItem('contact') == null){
         localStorage.setItem('contact', JSON.stringify([...this.state.ctcList]));
+        this.clearInput();
       }else{
         const oldStorage = JSON.parse(localStorage.getItem('contact'));
         console.log('old' , oldStorage);
         console.log('new', this.state.newCtc)
         localStorage.setItem('contact', JSON.stringify([...oldStorage,this.state.newCtc ]));
+        this.clearInput();
 
         // localStorage.setItem('contact', JSON.stringify([...this.state.ctcList ]));
       }
