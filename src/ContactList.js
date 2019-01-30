@@ -47,6 +47,13 @@ class ContactList extends Component {
   //   console.log(event.target.value);
   // }
 
+  componentWillMount(){
+    const local = JSON.parse(localStorage.getItem('contact'));
+    if(local !== null){
+      this.setState({ctcList:local});
+    }
+  }
+
   async componentDidMount() {
     try{
       const result = await fetch('https://jsonplaceholder.typicode.com/users')
