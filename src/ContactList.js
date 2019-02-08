@@ -29,6 +29,21 @@ import ContactPage from './ContactPage';
 //   export default ContactList;
 
 
+import {connect} from 'react-redux';
+import {userInputField} from './actions';
+
+const mapStateToProps = state =>{
+  return{
+    name: state.nameInput.name
+  }
+}
+const mapDispatchToProps = (dispatch) =>{
+  return{ 
+    onNameChange:(event) => dispatch(userInputField(event.target.value))
+  }
+}
+
+
 class ContactList extends Component {
   constructor(props){
     super(props);
@@ -213,4 +228,4 @@ class ContactList extends Component {
     )
   }
 }
-export default ContactList;
+export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
