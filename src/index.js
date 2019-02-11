@@ -4,10 +4,7 @@ import './index.css';
 import App from './App';
 
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
-import {nameInput} from './reducers';
-
-const store = createStore(nameInput)
+import store from './redux/store';
 
 ReactDOM.render(
 <Provider store={store}>

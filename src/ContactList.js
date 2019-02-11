@@ -5,7 +5,7 @@ import ContactPage from './ContactPage';
 
 
 import {connect} from 'react-redux';
-import {userInputField} from './actions';
+import {nameForm} from './redux/actions/formActions';
 
 const mapStateToProps = state =>{
   return{
@@ -14,9 +14,10 @@ const mapStateToProps = state =>{
 }
 const mapDispatchToProps = (dispatch) =>{
   return{ 
-    onNameChange:(event) => dispatch(userInputField(event.target.value))
+    onNameChange:(event) => dispatch(nameForm(event.target.value))
   }
 }
+
 
 
 class ContactList extends Component {
@@ -41,6 +42,7 @@ class ContactList extends Component {
   }
 
   async componentDidMount() {
+    console.log(this.props.store);
     try{
       const result = await fetch('https://jsonplaceholder.typicode.com/users')
       const data = await result.json()
@@ -121,9 +123,8 @@ class ContactList extends Component {
 
     return (
       <div>
-      {console.log(`store ${this.props.name}`)}
-      <Contact firstName = {this.state.name} lastName='mcdaniel' phoneNumber = '585-721-3824' />
-      <input type = 'text' name = 'name' onChange = {this.onChangeInput}></input>
+      <input type = 'text' name = 'name' value={this.props.name} onChange = {this.props.onChangeInput}></input>
+      <Contact firstName = {this.name} lastName='mcdaniel' phoneNumber = '585-721-3824' />
 
 
 
@@ -146,4 +147,6 @@ class ContactList extends Component {
     )
   }
 }
+
+
 export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
