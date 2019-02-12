@@ -9,7 +9,7 @@ import {nameForm} from './redux/actions/formActions';
 
 const mapStateToProps = state =>{
   return{
-    name: state.nameInput.name
+    name: state.name
   }
 }
 const mapDispatchToProps = (dispatch) =>{
@@ -35,6 +35,7 @@ class ContactList extends Component {
 
 
   componentWillMount(){
+    
     const local = JSON.parse(localStorage.getItem('contact'));
     if(local !== null){
       this.setState({ctcList:local});
@@ -42,7 +43,6 @@ class ContactList extends Component {
   }
 
   async componentDidMount() {
-    console.log(this.props.store);
     try{
       const result = await fetch('https://jsonplaceholder.typicode.com/users')
       const data = await result.json()
@@ -122,11 +122,10 @@ class ContactList extends Component {
   render() {
 
     return (
+      
       <div>
-      <input type = 'text' name = 'name' value={this.props.name} onChange = {this.props.onChangeInput}></input>
-      <Contact firstName = {this.name} lastName='mcdaniel' phoneNumber = '585-721-3824' />
-
-
+      <input type = 'text' name = 'name' onChange = {this.props.onNameChange}></input>
+      <Contact firstName = {this.state.name} lastName='mcdaniel' phoneNumber = '585-721-3824' />
 
       <form onSubmit = {this.newSubmit}>
 

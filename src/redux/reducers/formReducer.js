@@ -5,6 +5,7 @@ const initialState = {
 }
 
 export const nameInput = (state =initialState, action={}) =>{
+    console.log(action.type)
     switch(action.type){
         case CHANGE_INPUT_FIELD :
         return {
