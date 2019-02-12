@@ -9,7 +9,7 @@ import {nameForm} from './redux/actions/formActions';
 
 const mapStateToProps = state =>{
   return{
-    name: state.name
+    name: state.state.name
   }
 }
 const mapDispatchToProps = (dispatch) =>{
@@ -24,7 +24,6 @@ class ContactList extends Component {
   constructor(props){
     super(props);
     this.state = {
-      // name: '',
       test1:'',
       test2:'',
       newCtc:{},
@@ -124,8 +123,9 @@ class ContactList extends Component {
     return (
       
       <div>
+      <Contact firstName = {this.props.name} lastName='mcdaniel' phoneNumber = '585-721-3824' />
       <input type = 'text' name = 'name' onChange = {this.props.onNameChange}></input>
-      <Contact firstName = {this.state.name} lastName='mcdaniel' phoneNumber = '585-721-3824' />
+
 
       <form onSubmit = {this.newSubmit}>
 
