@@ -5,16 +5,20 @@ import ContactPage from './ContactPage';
 
 
 import {connect} from 'react-redux';
-import {nameForm} from './redux/actions/formActions';
+import {nameForm, requestUsers} from './redux/actions/formActions';
 
 const mapStateToProps = state =>{
   return{
-    name: state.state.name
+    name: state.nameInput.name,
+    users: state.requestUsers.users,
+    isPending: state.requestUsers.isPending,
+    error: state.requestUsers.error
   }
 }
 const mapDispatchToProps = (dispatch) =>{
   return{ 
-    onNameChange:(event) => dispatch(nameForm(event.target.value))
+    onNameChange:(event) => dispatch(nameForm(event.target.value)),
+    onRequestUsers: () => dispatch(requestUsers())
   }
 }
 
@@ -28,7 +32,6 @@ class ContactList extends Component {
       test2:'',
       newCtc:{},
       ctcList:[],
-      arr: []
     }
   }
 
@@ -42,14 +45,15 @@ class ContactList extends Component {
   }
 
   async componentDidMount() {
-    try{
-      const result = await fetch('https://jsonplaceholder.typicode.com/users')
-      const data = await result.json()
-      this.setState({arr:data})
+    // try{
+    //   const result = await fetch('https://jsonplaceholder.typicode.com/users')
+    //   const data = await result.json()
+    //   this.setState({arr:data})
 
-    }catch(err){
-      console.log(err)
-    }
+    // }catch(err){
+    //   console.log(err)
+    // }
+    this.props.onRequestUsers();
   }
 
   onChangeInput = (e)=>{
@@ -139,7 +143,7 @@ class ContactList extends Component {
       </form>
 
       <ContactPage contacts = {this.state.ctcList} />
-      <TestData data={this.state.arr} />  
+      <TestData data={this.props.users} />  
 
 
     </div> 

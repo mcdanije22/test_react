@@ -1,8 +1,9 @@
 import {combineReducers} from 'redux';
-import formReducer from './formReducer';
+import {nameInput, requestUsers} from './formReducer';
 
  const rootReducer = combineReducers({
-    state: formReducer
+    nameInput,
+    requestUsers
 });
 
 export default rootReducer;

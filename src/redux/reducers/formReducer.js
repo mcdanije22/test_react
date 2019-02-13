@@ -1,11 +1,15 @@
-import {CHANGE_INPUT_FIELD} from '../constants';
+import {
+    CHANGE_INPUT_FIELD,
+    REQUEST_USERS_PENDING,
+    REQUEST_USERS_SUCESS,
+    REQUEST_USERS_FAILED
+} from '../constants';
 
 const initialState = {
     name:''
 }
 
 export const nameInput = (state =initialState, action={}) =>{
-    console.log(action.type)
     switch(action.type){
         case CHANGE_INPUT_FIELD :
         return {
@@ -17,4 +21,31 @@ export const nameInput = (state =initialState, action={}) =>{
         return state;
     }
 };
-export default nameInput;
+
+const initialStateUsers = {
+    isPending: false,
+    users: [],
+    error: ''
+}
+export const requestUsers = (state = initialStateUsers, action={})=>{
+    switch(action.type){
+        case REQUEST_USERS_PENDING:
+        return{
+            ...state,
+            isPending:true
+        }
+        case REQUEST_USERS_SUCESS:
+        return{
+            ...state,
+            users:action.payload,
+            isPending:false
+        }
+        case REQUEST_USERS_FAILED:
+        return{
+            ...state,
+            error:action.payload, isPending:false
+        }
+        default:
+        return state
+    }
+}
